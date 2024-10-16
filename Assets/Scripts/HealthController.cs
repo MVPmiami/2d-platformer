@@ -1,45 +1,34 @@
 using UnityEngine;
 
-public class HealthController : MonoBehaviour
+public abstract class HealthController : MonoBehaviour
 {
-    //создать общий абстрактный класс HealthController, а этот будет PlayerHealthController
-    //подключить PlayerCollector, EnemyMover
-    //подписаться на 2 события на рестор хп и на редюс хп соответвенно
-    [SerializeField] private float _maxHealth;
-    [SerializeField] Player _player;
+    [SerializeField] protected float _maxHealth;
 
-    private float _health;
+    protected float _health;
 
-    private void Start()
+    public float MaxHealth => _maxHealth;
+    public float Health => _health;
+
+    protected virtual void Start()
     {
         _health = _maxHealth;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (_health <= 0)
             Death();
     }
 
-    public void RestoreHealth(float health)
+    protected virtual void ReduceHealth(float health)
     {
-        if (_health + health > _maxHealth)
-            _health = _maxHealth;
-        else
-            _health += health;
+        _health -= health;
     }
 
-    public void ReduceHealth(float health)
+    protected virtual void RestoreHealth(float health)
     {
-        if (_health - health <= 0)
-            Death();
-        else
-            _health -= health;
+        _health = _health + health > _maxHealth ? _maxHealth : _health += health;
     }
 
-    private void Death()
-    {
-        //скорее всего надо будет пробрасывать геймобчект
-        Destroy(_player.gameObject);
-    }
+    protected abstract void Death();
 }

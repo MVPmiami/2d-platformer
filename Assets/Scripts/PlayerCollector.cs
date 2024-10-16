@@ -31,3 +31,4 @@ public class PlayerCollector : MonoBehaviour
         HealthPotionSelected?.Invoke(healthPotion.GetHealthRocoveryValue());
     }
 }
+

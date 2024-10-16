@@ -7,6 +7,7 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private float _jumpForce;
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private InputReader _inputReader;
+    [SerializeField] private float _damage;
 
     public void Jump()
     {
@@ -20,9 +21,9 @@ public class PlayerMover : MonoBehaviour
         ChangeViewDirection(horizontInput);
     }
 
-    public void Attack(float damage, Enemy enemy)
+    public void Attack(Enemy enemy)
     {
-       enemy.TakeDamage(DealDamage(damage));
+       enemy.TakeDamage(DealDamage(_damage));
     }
 
     private float DealDamage(float damage)

@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 
-
 public class PlayerDetector : MonoBehaviour
 {
     [SerializeField] private LayerMask _playerLayer;
@@ -19,7 +18,6 @@ public class PlayerDetector : MonoBehaviour
     private void FixedUpdate()
     {
         ChangeDirection();
-        Debug.DrawRay(transform.position, _direction * _raycastDistance, Color.red);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, _direction, _raycastDistance, _playerLayer);
 
         if (hit.collider != null && hit.collider.gameObject.TryGetComponent(out Player player))

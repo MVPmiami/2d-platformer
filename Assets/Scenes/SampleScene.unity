@@ -848,7 +848,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 285, y: 275}
+  m_AnchoredPosition: {x: 549, y: 427}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &39244713
@@ -2236,6 +2236,7 @@ GameObject:
   - component: {fileID: 147838131}
   - component: {fileID: 147838129}
   - component: {fileID: 147838132}
+  - component: {fileID: 147838133}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -2259,6 +2260,7 @@ MonoBehaviour:
   _jumpForce: 15.6
   _rigidbody: {fileID: 147838123}
   _inputReader: {fileID: 147838128}
+  _damage: 10
 --- !u!212 &147838121
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2320,7 +2322,7 @@ Transform:
   m_GameObject: {fileID: 147838119}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.9, y: -3.29, z: 0}
+  m_LocalPosition: {x: -23.39, y: -0.32, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2437,8 +2439,7 @@ MonoBehaviour:
   _playerAnimator: {fileID: 147838129}
   _playerCollector: {fileID: 147838131}
   _enemyDetector: {fileID: 147838132}
-  _maxHealthPoint: 100
-  _damage: 10
+  _playerHealthController: {fileID: 147838133}
 --- !u!114 &147838128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2504,6 +2505,21 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   _raycastDistance: 0.5
+--- !u!114 &147838133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 147838119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d1e86c883553ba45b551ccd8ea8a6c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
+  _playerCollector: {fileID: 147838131}
+  _player: {fileID: 147838126}
 --- !u!1 &153435908
 GameObject:
   m_ObjectHideFlags: 0
@@ -10809,11 +10825,12 @@ GameObject:
   - component: {fileID: 622134367}
   - component: {fileID: 622134366}
   - component: {fileID: 622134365}
-  - component: {fileID: 622134370}
-  - component: {fileID: 622134369}
   - component: {fileID: 622134371}
+  - component: {fileID: 622134369}
+  - component: {fileID: 622134370}
   - component: {fileID: 622134372}
   - component: {fileID: 622134373}
+  - component: {fileID: 622134374}
   m_Layer: 3
   m_Name: Enemy1
   m_TagString: Enemy
@@ -10972,7 +10989,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e3aa8968778934090f64698ecee641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealthPoint: 40
 --- !u!114 &622134370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11047,6 +11063,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 622134371}
+--- !u!114 &622134374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 622134364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 541334e4411e8f745b7fadcb99ca7634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 40
+  _enemy: {fileID: 622134369}
 --- !u!1 &631915072
 GameObject:
   m_ObjectHideFlags: 0
@@ -14732,6 +14762,7 @@ GameObject:
   - component: {fileID: 889750250}
   - component: {fileID: 889750253}
   - component: {fileID: 889750254}
+  - component: {fileID: 889750255}
   m_Layer: 3
   m_Name: Enemy2
   m_TagString: Enemy
@@ -14914,7 +14945,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e3aa8968778934090f64698ecee641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealthPoint: 40
 --- !u!95 &889750252
 Animator:
   serializedVersion: 5
@@ -14965,6 +14995,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 889750252}
+--- !u!114 &889750255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889750245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 541334e4411e8f745b7fadcb99ca7634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 40
+  _enemy: {fileID: 889750251}
 --- !u!1 &889936366
 GameObject:
   m_ObjectHideFlags: 0
@@ -17353,7 +17397,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1047318724
 MonoBehaviour:
   m_ObjectHideFlags: 0
