@@ -9,7 +9,7 @@ public class Player : Character
     [SerializeField] private PlayerAnimator _playerAnimator;
     [SerializeField] private PlayerCollector _playerCollector;
     [SerializeField] private EnemyDetector _enemyDetector;
-    [SerializeField] private PlayerHealthController _playerHealthController;
+    [SerializeField] private PlayerHealth _playerHealth;
 
     private void FixedUpdate()
     {

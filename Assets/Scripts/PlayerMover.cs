@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
@@ -8,6 +9,8 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private InputReader _inputReader;
     [SerializeField] private float _damage;
+
+    public event Action<float> DirectionChanged;
 
     public void Jump()
     {
@@ -34,11 +37,12 @@ public class PlayerMover : MonoBehaviour
     private void ChangeViewDirection(float horizontInput)
     {
         if( horizontInput * transform.localScale.x < 0)
-            Flip();
+            Flip(horizontInput);
     }
 
-    private void Flip()
+    private void Flip(float horizontInput)
     {
         transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+        DirectionChanged?.Invoke(horizontInput);
     }
 }

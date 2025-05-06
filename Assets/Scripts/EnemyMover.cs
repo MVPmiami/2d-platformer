@@ -15,6 +15,8 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] private float _improvedSpeed;
     [SerializeField] private EnemyAnimator _enemyAnimator;
 
+    public event Action<float> DirectionChanged;
+
     private int _currentPoint;
     private bool _isPatrolling;
     private float _distanceToPlayer;
@@ -79,9 +81,14 @@ public class EnemyMover : MonoBehaviour
     private void ChangeViewDirection()
     {
         if (_currentPoint != 0)
+        {
             transform.localScale = new Vector2(_localScale, _localScale);
-        else if (_currentPoint == 0)
+            DirectionChanged?.Invoke(_localScale);
+        }else if (_currentPoint == 0)
+        {
             transform.localScale = new Vector2(-_localScale, _localScale);
+            DirectionChanged?.Invoke(-_localScale);
+        }
     }
 
     private void SetPatrolStatus(bool patrolStatus, float distance)
