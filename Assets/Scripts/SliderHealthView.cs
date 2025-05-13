@@ -22,8 +22,6 @@ public class SliderHealthView : HealthView
     {
         float targetHealth = currentHealth / _healthScale;
 
-        if (slider.value == targetHealth) yield break;
-
         while (slider.value != targetHealth)
         {
             slider.value = Mathf.MoveTowards(slider.value, targetHealth, smoothSpeed * Time.deltaTime);

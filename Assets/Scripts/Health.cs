@@ -3,9 +3,9 @@ using UnityEngine;
 
 public abstract class Health : MonoBehaviour
 {
-    [SerializeField] protected float _maxHealth;
+    [SerializeField] private float _maxHealth;
 
-    protected float _health;
+    private float _health;
 
     public event Action<float> HealthChanged;
 
@@ -23,16 +23,22 @@ public abstract class Health : MonoBehaviour
             Death();
     }
 
-    protected virtual void ReduceHealth(float health)
+    protected virtual void ReduceHealth(float damage)
     {
-        _health -= health;
-        HealthChanged?.Invoke(_health);
+        if (damage >= 0)
+        {
+            _health -= damage;
+            HealthChanged?.Invoke(_health);
+        }
     }
 
-    protected virtual void RestoreHealth(float health)
+    protected virtual void RestoreHealth(float heal)
     {
-        _health = _health + health > _maxHealth ? _maxHealth : _health += health;
-        HealthChanged?.Invoke(_health);
+        if (heal >= 0)
+        {
+            _health = _health + heal > _maxHealth ? _maxHealth : _health += heal;
+            HealthChanged?.Invoke(_health);
+        }
     }
 
     protected abstract void Death();

@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class EnemyMover : MonoBehaviour
+public class EnemyMover : Mover
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _attackRange;
@@ -14,8 +14,6 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] private Player _player;
     [SerializeField] private float _improvedSpeed;
     [SerializeField] private EnemyAnimator _enemyAnimator;
-
-    public event Action<float> DirectionChanged;
 
     private int _currentPoint;
     private bool _isPatrolling;
@@ -83,11 +81,12 @@ public class EnemyMover : MonoBehaviour
         if (_currentPoint != 0)
         {
             transform.localScale = new Vector2(_localScale, _localScale);
-            DirectionChanged?.Invoke(_localScale);
-        }else if (_currentPoint == 0)
+            OnDirectionChanged(_localScale);
+        }
+        else if (_currentPoint == 0)
         {
             transform.localScale = new Vector2(-_localScale, _localScale);
-            DirectionChanged?.Invoke(-_localScale);
+            OnDirectionChanged(-_localScale);
         }
     }
 
@@ -106,7 +105,8 @@ public class EnemyMover : MonoBehaviour
 
     private IEnumerator Attack()
     {
-        if (_isAttacking) yield break;
+        if (_isAttacking)
+            yield break;
 
         _isAttacking = true;
         var wait = new WaitForSeconds(1f);

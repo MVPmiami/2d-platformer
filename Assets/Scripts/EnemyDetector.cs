@@ -16,16 +16,18 @@ public class EnemyDetector : MonoBehaviour
     private void FixedUpdate()
     {
         ChangeDirection();
-        Debug.DrawRay(transform.position, _direction * _raycastDistance, Color.red);
+    }
+
+    public Enemy GetClosestEnemy() {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, _direction, _raycastDistance, _enemyLayer);
 
         if (hit.collider != null && hit.collider.gameObject.TryGetComponent(out Enemy enemy))
             _closestEnemy = enemy;
         else
             _closestEnemy = null;
-    }
 
-    public Enemy GetClosestEnemy() => _closestEnemy;
+        return _closestEnemy;
+    }
 
     private void ChangeDirection()
     {

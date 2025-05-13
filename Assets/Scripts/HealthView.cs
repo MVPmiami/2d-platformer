@@ -3,22 +3,20 @@ using UnityEngine;
 public abstract class HealthView : MonoBehaviour
 {
     [SerializeField] private Health _health;
-    [SerializeField] private PlayerMover _playerMover;
-    [SerializeField] private EnemyMover _enemyMover;
+    [SerializeField] private Mover _mover;
 
     private void OnEnable()
     {
         _health.HealthChanged += OnHealthChanged;
-        if(_playerMover != null)
-            _playerMover.DirectionChanged += OnDirectionChanged;
-        if (_enemyMover != null)
-            _enemyMover.DirectionChanged += OnDirectionChanged;
+
+        if(_mover != null)
+            _mover.DirectionChanged += OnDirectionChanged;
     }
 
     private void OnDisable()
     {
         _health.HealthChanged -= OnHealthChanged;
-        _playerMover.DirectionChanged -= OnDirectionChanged;
+        _mover.DirectionChanged -= OnDirectionChanged;
     }
 
     private void OnDirectionChanged(float horizontInput)
@@ -32,10 +30,10 @@ public abstract class HealthView : MonoBehaviour
         transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
-    protected abstract void UpdateHealthDisplay(float currentHealth);
-
-    protected void OnHealthChanged(float currentHealth)
+    private void OnHealthChanged(float currentHealth)
     {
         UpdateHealthDisplay(_health.CurrentHealth);
     }
+
+    protected abstract void UpdateHealthDisplay(float currentHealth);
 }

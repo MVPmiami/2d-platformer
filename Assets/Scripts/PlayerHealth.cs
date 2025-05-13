@@ -1,10 +1,9 @@
-using System;
 using UnityEngine;
 
 public class PlayerHealth : Health
 {
     [SerializeField] private PlayerCollector _playerCollector;
-    [SerializeField] Player _player;
+    [SerializeField] private Player _player;
 
     private void OnEnable()
     {
